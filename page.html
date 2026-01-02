@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="eng"> 
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Record Your Trade!</title>
+    <link rel="stylesheet" href="/page.css">
+    <script src="/js/App.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/NotesAPI.js"></script>
+    <script src="/js/NotesView.js"></script>
+</head> 
+<body>
+
+    <div class id="notes" itemid="app">
+        <div class id="notes_sidebar">
+            <button class id="notes_add" type="button">Add Note</button>
+            <div class id="notes_list">
+                <div class id="notes__list-item notes__list-item--selected">
+                    <div id="notes__small-title">Entry</div>
+                    <div id="notes_small-body">I bought $20 worth of </div>
+                    <div id="notes__small-updated">Thursday 3:30pm</div> 
+                </div>
+            </div>
+        </div>
+        <div id="notes__preview">
+            <input class ="notes__title" type="text" placeholder="Enter a title..."> 
+            <textarea class="notes__body">What was your thesis? </textarea>
+        </div>
+    </div>
+
+     <div class id="home"><a href="/index.html"><button>Home</button></a></div>
+
+</body>
+</html>
