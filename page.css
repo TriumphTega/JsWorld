@@ -99,6 +99,20 @@ body {
 }
 
 #home{
-    text-align: center;
-    padding: 50px;
+    text-align: center;  /* Center the text */
+    padding: 50px;  
+    background-color: #04AA6D; /* Green background */
+    border: none;             /* Remove default border */
+    color: white;             /* White text color */
+    padding: 15px 32px;       /* Space between text and border */
+    text-decoration: none;    /* Remove underline (if using an <a> tag) */
+    display: block;    /* Allows padding/margin to work correctly */
+    margin: 0 auto;
+    width: 25%;
+    font-size: 16px;          /* Increase font size */
+    cursor: pointer;          /* Change mouse cursor to a hand */
+    border-radius: 8px;       /* Rounded corners */
+    align-items: center;
 }
+
+
