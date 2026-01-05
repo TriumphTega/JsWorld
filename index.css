@@ -1,15 +1,37 @@
 body {
-    background-color: green;
-    color: antiquewhite;
+    background-color: black;
+    color: white;
     font-size: larger;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+
+.pt-serif-regular {
+  font-family: "PT Serif", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.pt-serif-bold {
+  font-family: "PT Serif", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.pt-serif-regular-italic {
+  font-family: "PT Serif", serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.pt-serif-bold-italic {
+  font-family: "PT Serif", serif;
+  font-weight: 700;
+  font-style: italic;
 }
 
 #Board{
     margin-top: 20px;
     text-align: center;
     align-items: center;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
 
 .button4alert{
@@ -23,13 +45,12 @@ body {
     padding-top: 25px;
     text-align: center;
     font-size: larger;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
 
 #journal{
     text-align: center;  /* Center the text */
     padding: 50px;  
-    background-color: #04AA6D; /* Green background */
+    background-color: white; /* Green background */
     border: none;             /* Remove default border */
     color: white;             /* White text color */
     padding: 8px 8px;       /* Space between text and border */
