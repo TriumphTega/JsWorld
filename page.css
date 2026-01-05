@@ -3,6 +3,7 @@ body {
     height: 100%;
     margin: 0;
     background-color: black;
+    width: 100%;
 }
 
 .notes {
@@ -98,7 +99,7 @@ body {
 #home{
 text-align: center;  /* Center the text */
     padding: 50px;  
-    background-color: #04AA6D; /* Green background */
+    background-color: white; /* Green background */
     border: none;             /* Remove default border */
     color: white;             /* White text color */
     padding: 8px 8px;       /* Space between text and border */

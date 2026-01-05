@@ -2,6 +2,7 @@ body {
     background-color: black;
     color: white;
     font-size: larger;
+    width: 100%;
 }
 
 .pt-serif-regular {
@@ -32,6 +33,15 @@ body {
     margin-top: 20px;
     text-align: center;
     align-items: center;
+    margin-left: 5%;
+    margin-right:5% ;
+}
+
+#login{
+    margin-top: 20px;
+    text-align: center;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 
 .button4alert{
@@ -49,19 +59,10 @@ body {
 
 #journal{
     text-align: center;  /* Center the text */
-    padding: 50px;  
-    background-color: white; /* Green background */
-    border: none;             /* Remove default border */
-    color: white;             /* White text color */
-    padding: 8px 8px;       /* Space between text and border */
+    color: black;             /* White text color */
+    background-color:black;
+    padding: 6px 2px;       /* Space between text and border */
     text-decoration: none;    /* Remove underline (if using an <a> tag) */
-    display: inline-block;    /* Allows padding/margin to work correctly */
-    margin: 0 auto;
-    width:  0 auto;  /* Increase font size */
     cursor: pointer;          /* Change mouse cursor to a hand */
     border-radius: 8px;       /* Rounded corners */
-    align-items: center;
-    margin-left: 45%;
-    margin-right: 45%;
 }
-
