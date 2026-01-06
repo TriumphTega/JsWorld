@@ -1,13 +1,15 @@
-import (app) from "./firebaseConfig";
+import (app) from "./firebaseConfig.js";
 
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+// ✅ New SDK (modular) - what you should use
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+const auth = getAuth(app);
+createUserWithEmailAndPassword(auth, email, password)
 
 const firebaseApp = firebase.initializeApp({
     //Your own Firebase Credentials..
 });
 
-const db = firebaseApp.firestore();
-const auth = firebaseApp.auth();
+
 
 const register = () => {
     const email = document.getElementById('email').value
