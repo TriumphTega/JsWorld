@@ -1,7 +1,10 @@
-
+import (app) from "./firebaseConfig";
 
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
+export default function App() {
+    
+}
 const auth = getAuth();
 createUserWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
