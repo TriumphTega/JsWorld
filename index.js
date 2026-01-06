@@ -1,115 +1,84 @@
-import (app) from "./firebaseConfig.js";
+import { auth } from "./firebaseConfig.js";
+import { 
+  signInWithEmailAndPassword, 
+  signOut,
+  GoogleAuthProvider,
+  signInWithPopup
+} from "firebase/auth";
 
-// ✅ New SDK (modular) - what you should use
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-const auth = getAuth(app);
-createUserWithEmailAndPassword(auth, email, password)
+// Wait for DOM to load
+document.addEventListener('DOMContentLoaded', () => {
+  const loginForm = document.querySelector('form');
+  const emailInput = document.getElementById('email');
+  const passwordInput = document.getElementById('password');
 
-const firebaseApp = firebase.initializeApp({
-    //Your own Firebase Credentials..
-});
+  // Handle form submission
+  loginForm.addEventListener('submit', async (e) => {
+    e.preventDefault(); // Prevent default form submission
+    
+    const email = emailInput.value.trim();
+    const password = passwordInput.value;
 
+    // Validate inputs
+    if (!email || !password) {
+      alert('Please enter both email and password');
+      return;
+    }
 
+    try {
+      // Sign in user
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      console.log('User logged in:', userCredential.user);
+      alert('Login successful!');
+      
+      // Redirect to welcome page
+      window.location.href = '/welcome.html';
+      
+    } catch (error) {
+      console.error('Login error:', error);
+      
+      // User-friendly error messages
+      let errorMessage = 'Login failed. ';
+      switch (error.code) {
+        case 'auth/invalid-email':
+          errorMessage += 'Invalid email address.';
+          break;
+        case 'auth/user-disabled':
+          errorMessage += 'This account has been disabled.';
+          break;
+        case 'auth/user-not-found':
+          errorMessage += 'No account found with this email.';
+          break;
+        case 'auth/wrong-password':
+          errorMessage += 'Incorrect password.';
+          break;
+        case 'auth/invalid-credential':
+          errorMessage += 'Invalid credentials. Please check your email and password.';
+          break;
+        default:
+          errorMessage += error.message;
+      }
+      
+      alert(errorMessage);
+    }
+  });
 
-const register = () => {
-    const email = document.getElementById('email').value
-    const password = document.getElementById('password').value
-
-    auth.createUserWithEmailAndPassword(email, password)
-    .then((res) => {
-        console.log(res.user)
-    })
-    .catch((err) => {
-        alert(err.message)
-        console.log(err.code)
-        console.log(err.message)
-    })
-}
-
-const login = () => {
-    const email = document.getElementById('email').value
-    const password = document.getElementById('password').value
-
-    auth.signInWithEmailAndPassword(email, password)
-    .then((res) => {
-        console.log(res.user)
-    })
-    .catch((err) => {
-        alert(err.message)
-        console.log(err.code)
-        console.log(err.message)
-    })
-}
-
-const saveData = () => {
-    const email = document.getElementById('email').value
-    const password = document.getElementById('password').value
-
-    db.collection('users')
-    .add({
-        email: email,
-        password: password
-    })
-    .then((docRef) => {
-        console.log("Document written with ID: ", docRef.id);
-    })
-    .catch((error) => {
-        console.error("Error adding document: ", error);
+  // Google Sign-In (if you have a Google sign-in button)
+  const googleSignInBtn = document.querySelector('button[type="submit"]:nth-of-type(2)');
+  if (googleSignInBtn) {
+    googleSignInBtn.addEventListener('click', async (e) => {
+      e.preventDefault();
+      
+      try {
+        const provider = new GoogleAuthProvider();
+        const result = await signInWithPopup(auth, provider);
+        console.log('Google sign-in successful:', result.user);
+        alert('Google sign-in successful!');
+        window.location.href = '/welcome.html';
+      } catch (error) {
+        console.error('Google sign-in error:', error);
+        alert('Google sign-in failed: ' + error.message);
+      }
     });
-}
-
-const readData = () => {
-    db.collection('users')
-    .get()
-    .then((data) => {
-        console.log(data.docs.map((item) => {
-            return {...item.data(), id: item.id}
-        }))
-    })
-}
-
-const updateData = () => {
-    db.collection('users').doc('6caYOiNxwviOJFIQ4Uag')
-    .update({
-        email: 'ashishisagoodboy1234@gmail.com',
-        password: '123456'
-    })
-    .then(() => {
-        alert('Data Updated')
-    })
-}
-
-const deleteData = () => {
-    db.collection('users').doc('6caYOiNxwviOJFIQ4Uag').delete()
-    .then(() => {
-        alert('Data Deleted')
-    })
-    .catch((err) =>{
-        console.log(err)
-    })
-}
-
-const auth = getAuth();
-signInWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed in
-    const user = userCredential.user;
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-  });
-
-import { getAuth, signOut } from "firebase/auth";
-
-//Sign Out (Add to sign out page)
-
-const auth = getAuth();
-signOut(auth)
-  .then(() => {
-    // Sign-out successful.
-  })
-  .catch((error) => {
-    // An error happened.
-  });
+  }
+});
