@@ -73,7 +73,41 @@
         const auth = getAuth(app);
         console.log("✅ Firebase initialized!");
 
-       
+        // Debug function
+       function checkElements() {
+            console.log("========================================");
+            console.log("🔍 CHECKING DOM ELEMENTS");
+            console.log("========================================");
+            
+            const debugInfo = document.getElementById('debugInfo');
+            let debugText = "";
+            
+            const elements = {
+                'loginForm': document.getElementById('loginForm'),
+                'email': document.getElementById('email'),
+                'password': document.getElementById('password'),
+                'errorMessage': document.getElementById('errorMessage'),
+                'signInBtn': document.getElementById('signInBtn'),
+                'googleSignInBtn': document.getElementById('googleSignInBtn')
+            };
+
+            for (const [name, element] of Object.entries(elements)) {
+                if (element) {
+                    console.log(`✅ ${name}: FOUND`);
+                    debugText += `✅ ${name} | `;
+                } else {
+                    console.log(`❌ ${name}: NOT FOUND`);
+                    debugText += `❌ ${name} | `;
+                }
+            }
+
+            if (debugInfo) {
+                debugInfo.textContent = debugText;
+                debugInfo.style.display = 'block';
+            }
+
+            return elements;
+        }
 
         // Initialize after a short delay to ensure DOM is ready
         function init() {
