@@ -16,8 +16,8 @@
 </head>
 <body>
 
-    <div class id="login-box">
-        <form action="">
+    <div class="login-box" id="login-box">
+        <form id="loginForm">
             <div class id="Login"><h2>Sign In</h2></div>
             <div class id="input-box">
                 <span class id="icon"></span>
@@ -33,12 +33,13 @@
                 <label><input type="checkbox">Remember me</label>
                 <a href="/passwordreset.html">Forgot Password?</a>
             </div>
-            <button type="submit">Sign In</button>
-            <button type="submit"><a href="#">Sign In with Google<icon></icon></a></button>
+            <button type="signInBtn">Sign In</button>
+             <button type="button" id="googleSignInBtn">Sign In with Google</button>
             <div class id="Register">
                 <p>Don't have an  account? <a href="/register.html">Register</a></p>
             </div>
-
+            <!-- Error message display -->
+            <div id="errorMessage" style="color: red; margin-top: 10px; display: none;"></div>
         </form>
 
         
