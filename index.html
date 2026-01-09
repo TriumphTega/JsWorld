@@ -11,7 +11,7 @@
 </head>
 <body>
 
-    <div class="login-box" id="login-box">
+   <div class="login-box" id="login-box">
         <form id="loginForm">
             <div class="login-header">
                 <h2>Sign In</h2>
@@ -42,19 +42,10 @@
             </div>
             
             <div id="errorMessage" style="color: red; margin-top: 10px; display: none;"></div>
-            <div id="debugInfo" style="color: yellow; margin-top: 10px; font-size: 12px;"></div>
         </form>
     </div>
 
     <script type="module">
-        // DIAGNOSTIC SCRIPT - Check what's happening
-        console.log("========================================");
-        console.log("🔍 DIAGNOSTIC MODE");
-        console.log("========================================");
-        console.log("Document ready state:", document.readyState);
-        console.log("Current URL:", window.location.href);
-        
-        // Import Firebase
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
         import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
 
@@ -68,85 +59,32 @@
             measurementId: "G-6QHND3BWFR"
         };
 
-        console.log("🔥 Initializing Firebase...");
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
-        console.log("✅ Firebase initialized!");
 
-        // Debug function
-       function checkElements() {
-            console.log("========================================");
-            console.log("🔍 CHECKING DOM ELEMENTS");
-            console.log("========================================");
-            
-            const debugInfo = document.getElementById('debugInfo');
-            let debugText = "";
-            
-            const elements = {
-                'loginForm': document.getElementById('loginForm'),
-                'email': document.getElementById('email'),
-                'password': document.getElementById('password'),
-                'errorMessage': document.getElementById('errorMessage'),
-                'signInBtn': document.getElementById('signInBtn'),
-                'googleSignInBtn': document.getElementById('googleSignInBtn')
-            };
-
-            for (const [name, element] of Object.entries(elements)) {
-                if (element) {
-                    console.log(`✅ ${name}: FOUND`);
-                    debugText += `✅ ${name} | `;
-                } else {
-                    console.log(`❌ ${name}: NOT FOUND`);
-                    debugText += `❌ ${name} | `;
-                }
-            }
-
-            if (debugInfo) {
-                debugInfo.textContent = debugText;
-                debugInfo.style.display = 'block';
-            }
-
-            return elements;
-        }
-
-        // Initialize after a short delay to ensure DOM is ready
         function init() {
-            console.log("🎯 Running initialization...");
-            
-            const elements = checkElements();
+            const loginForm = document.getElementById('loginForm');
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            const errorDiv = document.getElementById('errorMessage');
+            const googleSignInBtn = document.getElementById('googleSignInBtn');
 
-            // Check if all required elements exist
-            if (!elements.loginForm || !elements.email || !elements.password || 
-                !elements.errorMessage || !elements.googleSignInBtn) {
-                console.error("❌ CRITICAL: Some elements are missing!");
-                alert("ERROR: Page elements not found. Check console for details.");
-                return;
-            }
-
-            console.log("✅ All elements found! Setting up event listeners...");
-
-            // Helper functions
             function showError(message) {
-                console.error("❌ Error:", message);
-                elements.errorMessage.textContent = message;
-                elements.errorMessage.style.display = 'block';
+                errorDiv.textContent = message;
+                errorDiv.style.display = 'block';
             }
 
             function hideError() {
-                elements.errorMessage.style.display = 'none';
+                errorDiv.style.display = 'none';
             }
 
             // Email/Password Login
-            elements.loginForm.addEventListener('submit', async (e) => {
+            loginForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
-                console.log("📝 Login form submitted");
                 hideError();
 
-                const email = elements.email.value.trim();
-                const password = elements.password.value;
-
-                console.log("📧 Email:", email);
-                console.log("🔑 Password length:", password.length);
+                const email = emailInput.value.trim();
+                const password = passwordInput.value;
 
                 if (!email || !password) {
                     showError('Please enter both email and password');
@@ -154,17 +92,9 @@
                 }
 
                 try {
-                    console.log("🔐 Attempting login...");
-                    const userCredential = await signInWithEmailAndPassword(auth, email, password);
-                    console.log("✅ Login successful!", userCredential.user.email);
-                    console.log("User ID:", userCredential.user.uid);
-                    alert('Login successful! Redirecting...');
+                    await signInWithEmailAndPassword(auth, email, password);
                     window.location.href = './welcome.html';
                 } catch (error) {
-                    console.error("❌ Login failed:");
-                    console.error("Error code:", error.code);
-                    console.error("Error message:", error.message);
-                    
                     let errorMessage = '';
                     switch (error.code) {
                         case 'auth/invalid-email':
@@ -183,35 +113,22 @@
                             errorMessage = 'Too many failed attempts. Please try again later';
                             break;
                         default:
-                            errorMessage = `Login failed: ${error.message}`;
+                            errorMessage = 'Login failed. Please try again';
                     }
                     showError(errorMessage);
-                    alert(errorMessage);
                 }
             });
 
             // Google Sign-In
-            elements.googleSignInBtn.addEventListener('click', async (e) => {
+            googleSignInBtn.addEventListener('click', async (e) => {
                 e.preventDefault();
-                console.log("🔵 Google sign-in button clicked");
                 hideError();
 
                 try {
-                    console.log("🔐 Creating Google provider...");
                     const provider = new GoogleAuthProvider();
-                    
-                    console.log("🔐 Opening popup...");
-                    const result = await signInWithPopup(auth, provider);
-                    
-                    console.log("✅ Google sign-in successful!");
-                    console.log("User:", result.user.email);
-                    alert('Google sign-in successful!');
+                    await signInWithPopup(auth, provider);
                     window.location.href = './welcome.html';
                 } catch (error) {
-                    console.error("❌ Google sign-in failed:");
-                    console.error("Error code:", error.code);
-                    console.error("Error message:", error.message);
-                    
                     let errorMessage = '';
                     switch (error.code) {
                         case 'auth/popup-closed-by-user':
@@ -224,33 +141,20 @@
                             errorMessage = 'Domain not authorized in Firebase Console';
                             break;
                         default:
-                            errorMessage = `Google sign-in failed: ${error.message}`;
+                            errorMessage = 'Google sign-in failed';
                     }
                     showError(errorMessage);
-                    alert(errorMessage);
                 }
             });
-
-            console.log("✅ Event listeners attached successfully!");
-            console.log("========================================");
         }
 
-        // Multiple ways to ensure DOM is ready
         if (document.readyState === 'loading') {
-            console.log("⏳ DOM still loading, waiting...");
             document.addEventListener('DOMContentLoaded', () => {
-                console.log("✅ DOMContentLoaded fired");
-                setTimeout(init, 100); // Small delay to be sure
+                setTimeout(init, 100);
             });
         } else {
-            console.log("✅ DOM already ready");
-            setTimeout(init, 100); // Small delay to be sure
+            setTimeout(init, 100);
         }
-
-        // Backup: Also try after window load
-        window.addEventListener('load', () => {
-            console.log("✅ Window load event fired");
-        });
     </script>
 
     
