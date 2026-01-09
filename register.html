@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Journaly Registration</title>
     <link rel="stylesheet" href="index.css">
-    <script src="register.js" type="module"></script>
 </head>
 <body>
 
@@ -47,6 +46,104 @@
         </form>
     </div>
 
+      <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAWmlQgPu34uIDOsBBy4J3bdPB4QFue1iI",
+            authDomain: "journal-d2fcd.firebaseapp.com",
+            projectId: "journal-d2fcd",
+            storageBucket: "journal-d2fcd.firebasestorage.app",
+            messagingSenderId: "279588365736",
+            appId: "1:279588365736:web:47c252930b9fad19fd299d",
+            measurementId: "G-6QHND3BWFR"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        console.log("🔥 Firebase initialized!");
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const registerForm = document.getElementById('registerForm');
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            const errorDiv = document.getElementById('errorMessage');
+            const googleSignUpBtn = document.getElementById('googleSignUpBtn');
+
+            function showError(message) {
+                console.error("❌", message);
+                errorDiv.textContent = message;
+                errorDiv.style.display = 'block';
+                alert(message);
+            }
+
+            function hideError() {
+                errorDiv.style.display = 'none';
+            }
+
+            registerForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                hideError();
+
+                const email = emailInput.value.trim();
+                const password = passwordInput.value;
+
+                if (!email || !password) {
+                    showError('Please fill all fields');
+                    return;
+                }
+
+                if (password.length < 6) {
+                    showError('Password must be at least 6 characters');
+                    return;
+                }
+
+                try {
+                    console.log("🔐 Creating account:", email);
+                    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                    console.log("✅ Registration successful!", userCredential.user.email);
+                    alert('Registration successful!');
+                    window.location.href = '/welcome.html';
+                } catch (error) {
+                    console.error("❌ Registration error:", error.code);
+                    
+                    let errorMessage = 'Registration failed: ';
+                    switch (error.code) {
+                        case 'auth/email-already-in-use':
+                            errorMessage += 'Email already registered.';
+                            break;
+                        case 'auth/invalid-email':
+                            errorMessage += 'Invalid email address.';
+                            break;
+                        case 'auth/weak-password':
+                            errorMessage += 'Password too weak (min 6 characters).';
+                            break;
+                        default:
+                            errorMessage += error.message;
+                    }
+                    showError(errorMessage);
+                }
+            });
+
+            googleSignUpBtn.addEventListener('click', async (e) => {
+                e.preventDefault();
+                hideError();
+
+                try {
+                    const provider = new GoogleAuthProvider();
+                    const result = await signInWithPopup(auth, provider);
+                    console.log("✅ Google registration successful!");
+                    alert('Account created with Google!');
+                    window.location.href = '/welcome.html';
+                } catch (error) {
+                    console.error("❌ Google error:", error.code);
+                    showError('Google sign-up failed: ' + error.message);
+                }
+            });
+        });
+    </script>
     
 </body>
 </html>

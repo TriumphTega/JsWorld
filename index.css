@@ -163,7 +163,7 @@ font-weight: 600;
     text-decoration: underline;
 }
 
-#errorMessage {
+.errorMessage {
     text-align: center;
     padding: 10px;
     border-radius: 5px;

@@ -110,6 +110,8 @@ button {
     font-weight: 500;
 }
 
+
+
 @media (max-width: 768px) { .notes { flex-direction: column; } 
 .notes__sidebar { width: 100%; }
 }
