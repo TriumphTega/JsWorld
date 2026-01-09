@@ -13,14 +13,14 @@ body{
     min-height: 100vh;
 }
 
-#Login{
+.login-header{
     text-align: center;
     font-size: 2em;
     color: white;
 
 }
 
-#Register{
+.register-link{
     text-align: center;
 }
 
@@ -42,7 +42,7 @@ section {
     }
 }
 
-#login-box{
+.login-box{
     position: relative;
     width: 400px;
     height: 450px;
@@ -55,14 +55,14 @@ section {
     backdrop-filter: blur(15px);
 }
 
-#input-box{
+.input-box{
     position: relative;
     width: 310px;
     margin: 30px 0;
     border-bottom: 2px solid white;
 }
 
-#input-box label {
+.input-box label {
     position: absolute;
     top: 50%;
     left: 5px;
@@ -73,11 +73,11 @@ section {
     transition: .5s;
 }
 
-#input-box input:focus~label,
-#input-box input:valid~label{
+.input-box input:focus~label,
+.input-box input:valid~label{
     top: -5px;
 }
-#input-box input{
+.input-box input{
     width: 100%;
     height: 50px;
     background: transparent;
@@ -87,7 +87,7 @@ section {
     padding: 0 35px 0 5px;
 }
 
-#input-box .icon{
+.input-box .icon{
     position:absolute;
     right: 8px;
     color: white;
@@ -96,7 +96,7 @@ section {
     line-height: 10px;
 }
 
-#remember-forgot {
+.remember-forgot {
     margin: -15px 0 15px;
     font-size: .9em;
     color: white;
@@ -104,16 +104,16 @@ section {
     justify-content: space-between;
 }
 
-#remember-forgot label input {
+.remember-forgot label input {
     margin-right: 3px;
 }
 
-#remember-forgot a {
+.remember-forgot a {
     color: white;
     text-decoration: none;
 }
 
-#remember-forgot a:hover {
+.remember-forgot a:hover {
     text-decoration: underline;
 }
  
@@ -131,7 +131,7 @@ button {
     text-decoration: none;
 }
 
-#create {
+.create {
     text-decoration: none;
     width: 100%;
     height: 40px;
@@ -146,20 +146,20 @@ button {
 
 }
 
-#Register {
+.register-link {
     font-size: .9em;
     color: white;
     text-align: center;
     margin: 25px 0 10px;
 }
 
-#Register p a{
+.register-link p a{
 color: white;
 text-decoration: none;
 font-weight: 600;
 }
 
-#Register p a:hover {
+.register-link p a:hover {
     text-decoration: underline;
 }
 

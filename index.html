@@ -11,29 +11,36 @@
 </head>
 <body>
 
-    <div class="login-box" id="login-box">
+   <div class="login-box" id="login-box">
         <form id="loginForm">
-            <div class id="Login"><h2>Sign In</h2></div>
-            <div class id="input-box">
-                <span class id="icon"></span>
+            <div class="login-header">
+                <h2>Sign In</h2>
+            </div>
+            
+            <div class="input-box">
+                <span class="icon"></span>
                 <input type="email" id="email" required>
                 <label>Email</label>
             </div>
-            <div class id="input-box">
-                <span class id="icon"></span>
+            
+            <div class="input-box">
+                <span class="icon"></span>
                 <input type="password" id="password" required>
                 <label>Password</label>
             </div>
-            <div class id="remember-forgot">
+            
+            <div class="remember-forgot">
                 <label><input type="checkbox">Remember me</label>
                 <a href="/passwordreset.html">Forgot Password?</a>
             </div>
-            <button type="signInBtn">Sign In</button>
-             <button type="button" id="googleSignInBtn">Sign In with Google</button>
-            <div class id="Register">
-                <p>Don't have an  account? <a href="/register.html">Register</a></p>
+            
+            <button type="submit" id="signInBtn">Sign In</button>
+            <button type="button" id="googleSignInBtn">Sign In with Google</button>
+            
+            <div class="register-link">
+                <p>Don't have an account? <a href="/register.html">Register</a></p>
             </div>
-            <!-- Error message display -->
+            
             <div id="errorMessage" style="color: red; margin-top: 10px; display: none;"></div>
         </form>
     </div>

@@ -9,39 +9,49 @@
 </head>
 <body>
 
-    <div class id="login-box">
-        <form action="">
-
-             <div class id="Login"><h2>Create Account</h2></div>
-            <div class id="input-box">
-                <span class id="icon"></span>
-                <input type="text" required>
+     <div class="login-box">
+        <form id="registerForm">
+            <div class="login-header">
+                <h2>Create Account</h2>
+            </div>
+            
+            <div class="input-box">
+                <span class="icon"></span>
+                <input type="text" id="firstName" required>
                 <label>First Name</label>
             </div>
-            <div class id="input-box">
-                <span class id="icon"></span>
-                <input type="text" required>
+            
+            <div class="input-box">
+                <span class="icon"></span>
+                <input type="text" id="lastName" required>
                 <label>Last Name</label>
             </div>
-
-            <div class id="input-box">
-                <span class id="icon"></span>
+            
+            <div class="input-box">
+                <span class="icon"></span>
                 <input type="email" id="email" required>
                 <label>Email</label>
             </div>
-            <div class id="input-box">
-                <span class id="icon"></span>
+            
+            <div class="input-box">
+                <span class="icon"></span>
                 <input type="password" id="password" required>
                 <label>Password</label>
             </div>
-            <div class id="remember-forgot">
+            
+            <div class="remember-forgot">
                 <label><input type="checkbox">Remember me</label>
             </div>
+            
             <button type="submit">Finish</button>
-            <button id="create"><a href="#">Create with Google</a></button>
-            <div class id="Register">
+            <button type="button" id="googleSignUpBtn">Create with Google</button>
+            
+            <div class="register-link">
                 <p>Already have an account? <a href="index.html">Login</a></p>
             </div>
+            
+            <div id="errorMessage" style="color: red; margin-top: 10px; display: none;"></div>
+        </form>
 
         </form>
     </div>
